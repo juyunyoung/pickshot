@@ -1,6 +1,6 @@
 # 픽샷 (PickShot) PRD
 
-- 문서 버전: v0.2 (초안)
+- 문서 버전: v0.3 (초안)
 - 작성일: 2026-10-25
 - 작성: 달조아랩
 - 바탕 문서: [CARTOONHOUSE-APP-START.md](./CARTOONHOUSE-APP-START.md) (가칭 '카툰하우스' 기획·분석)
@@ -186,7 +186,8 @@
 | 앱 (`app/`) | TanStack Start(SPA 모드) + React 19 + Vite + Tailwind v4 + shadcn/Radix + React Query, Capacitor 8로 안드로이드·iOS |
 | 관리자 웹 (`admin/`) | Next.js 15 |
 | 백엔드 (`supabase/`) | Supabase (Postgres + Auth + Storage + Realtime + Edge Functions), pgvector |
-| AI | Gemini 계속 사용 여부 **[미정]** (쓸 경우 새 API 키 발급) |
+| AI | Gemini **[확정]** (새 API 키 발급) |
+| 키 관리 | 각 폴더 `.env.local` (커밋 안 됨) → [ENV-SETUP.md](./ENV-SETUP.md) **[확정]** |
 | 배포 | Cloud Build → Cloud Run(Docker), 네이티브는 `cap sync` |
 
 - 앱 코드 규칙: 파일 기반 라우트(`src/routes`, 하단 탭 `_tabs.*.tsx`), Supabase 쿼리는 `src/services/*.service.ts`, AI 호출은 `createServerFn` (비밀 키는 핸들러 안에서만 읽기)
@@ -286,8 +287,8 @@
 | 1 | 코드 저장소 | **확정** — `juyunyoung/pickshot` (GitHub에 저장소 생성 필요) |
 | 2 | 앱 이름 | **확정** — 픽샷 (PickShot) |
 | 3 | 패키지명 | **확정** — `com.daljoalab.pickshot` |
-| 4 | AI 모델 | 미정 — Gemini 계속 사용? (쓰면 새 키 발급) |
-| 5 | Supabase 프로젝트 | 미정 — 새로 만든 뒤 URL·anon key 전달 (service role key는 환경변수로만) |
+| 4 | AI 모델 | **확정** — Gemini, 새 API 키 발급 |
+| 5 | Supabase 프로젝트 | **확정** — 새로 생성, 키는 `.env.local`에 직접 입력 (채팅에 붙이지 않음) |
 | 6 | 시작 범위 | 미정 — 0~2단계부터 진행할지 |
 | 7 | 로그인 방식 | 미정 — 이메일 / 구글 / 애플 / 카카오 |
 | 8 | 기존 cartoonhouse 노출 키 교체 | 사용자 확인 대기 |
