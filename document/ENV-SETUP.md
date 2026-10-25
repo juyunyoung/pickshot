@@ -17,6 +17,14 @@
 2. → `GEMINI_API_KEY` (**비밀**, 서버에서만)
 3. 기존 cartoonhouse에 노출된 키는 같은 화면에서 삭제
 
+### 소셜 로그인 (구글·애플·카카오·페이스북)
+- 각 서비스에서 받은 키는 `.env.local`이 아니라 **Supabase 대시보드 > Authentication > Providers**에 넣는다
+- 준비 순서는 [AUTH-SNS.md](./AUTH-SNS.md) 5장
+
+### SNS 게시용 메타 앱 (인스타그램·페이스북·쓰레드)
+1. https://developers.facebook.com → 앱 만들기 → 페이스북 로그인 · 인스타그램 · 쓰레드 제품 추가
+2. 앱 ID·시크릿 → `META_APP_ID` / `META_APP_SECRET`, 인스타그램 → `INSTAGRAM_APP_*`, 쓰레드 → `THREADS_APP_*` (**비밀**, 서버에서만, app만)
+
 ## 2. `.env.local` 만들기
 
 ```bash
@@ -31,6 +39,7 @@ cp ~/pickshot/admin/.env.example ~/pickshot/admin/.env.local
 | Supabase anon key | `VITE_SUPABASE_ANON_KEY` | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | 공개 |
 | Supabase service role key | `SUPABASE_SERVICE_ROLE_KEY` | `SUPABASE_SERVICE_ROLE_KEY` | **비밀** |
 | Gemini API key | `GEMINI_API_KEY` | `GEMINI_API_KEY` | **비밀** |
+| 메타 앱 (페이스북·인스타그램·쓰레드) | `META_APP_*`, `INSTAGRAM_APP_*`, `THREADS_APP_*` | – | **비밀** |
 
 > 비밀 값에는 `VITE_` / `NEXT_PUBLIC_` 접두사를 절대 붙이지 않는다. 붙이면 앱 코드에 그대로 노출된다.
 
@@ -39,7 +48,7 @@ cp ~/pickshot/admin/.env.example ~/pickshot/admin/.env.local
 | 파일 | 내용 |
 |---|---|
 | `app/src/lib/env.ts` | 앱 공개 값 (`env.supabaseUrl`, `env.supabaseAnonKey`) |
-| `app/src/lib/env.server.ts` | 앱 서버 함수용 비밀 값 (`getGeminiApiKey()`, `getSupabaseServiceRoleKey()`) — `createServerFn` 핸들러 안에서만 호출 |
+| `app/src/lib/env.server.ts` | 앱 서버 함수용 비밀 값 (`getGeminiApiKey()`, `getSupabaseServiceRoleKey()`, `getMetaApp()`, `getInstagramApp()`, `getThreadsApp()`) — `createServerFn` 핸들러 안에서만 호출 |
 | `admin/lib/env.ts` | 관리자 웹 공개·비밀 값 |
 
 값이 비어 있으면 어떤 변수가 빠졌는지 오류 메시지로 알려준다.

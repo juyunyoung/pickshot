@@ -12,3 +12,8 @@ function required(name: string): string {
 
 export const getSupabaseServiceRoleKey = () => required('SUPABASE_SERVICE_ROLE_KEY')
 export const getGeminiApiKey = () => required('GEMINI_API_KEY')
+
+// SNS 게시용 메타 앱 (document/AUTH-SNS.md)
+export const getMetaApp = () => ({ id: required('META_APP_ID'), secret: required('META_APP_SECRET') })
+export const getInstagramApp = () => ({ id: required('INSTAGRAM_APP_ID'), secret: required('INSTAGRAM_APP_SECRET') })
+export const getThreadsApp = () => ({ id: required('THREADS_APP_ID'), secret: required('THREADS_APP_SECRET') })
